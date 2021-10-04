@@ -227,7 +227,7 @@ def start(update: Update, context: CallbackContext):
                             ),
                             InlineKeyboardButton(
                                 text="Channel",
-                                url="https://t.me/XcodersHub",
+                                url="https://t.me/AnimeRepublicChannel",
                             ),
                         ],
                         [
