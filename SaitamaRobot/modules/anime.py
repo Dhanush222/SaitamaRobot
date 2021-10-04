@@ -364,90 +364,6 @@ def manga(update: Update, context: CallbackContext):
 
 
 @run_async
-def user(update: Update, context: CallbackContext):
-    message = update.effective_message
-    search_query = extract_arg(message)
-
-    if not search_query:
-        update.effective_message.reply_text("Format : /user <username>")
-        return
-
-    jikan = jikanpy.jikan.Jikan()
-
-    try:
-        us = jikan.user(search_query)
-    except jikanpy.APIException:
-        update.effective_message.reply_text("Username not found.")
-        return
-
-    progress_message = update.effective_message.reply_text("Searching.... ")
-
-    date_format = "%Y-%m-%d"
-    if us["image_url"] is None:
-        img = "https://cdn.myanimelist.net/images/questionmark_50.gif"
-    else:
-        img = us["image_url"]
-
-    try:
-        user_birthday = datetime.datetime.fromisoformat(us["birthday"])
-        user_birthday_formatted = user_birthday.strftime(date_format)
-    except:
-        user_birthday_formatted = "Unknown"
-
-    user_joined_date = datetime.datetime.fromisoformat(us["joined"])
-    user_joined_date_formatted = user_joined_date.strftime(date_format)
-
-    for entity in us:
-        if us[entity] is None:
-            us[entity] = "Unknown"
-
-    about = us["about"].split(" ", 60)
-
-    try:
-        about.pop(60)
-    except IndexError:
-        pass
-
-    about_string = " ".join(about)
-    about_string = about_string.replace("<br>", "").strip().replace("\r\n", "\n")
-
-    caption = ""
-
-    caption += textwrap.dedent(
-        f"""
-    *Username*: [{us['username']}]({us['url']})
-
-    *Gender*: `{us['gender']}`
-    *Birthday*: `{user_birthday_formatted}`
-    *Joined*: `{user_joined_date_formatted}`
-    *Days wasted watching anime*: `{us['anime_stats']['days_watched']}`
-    *Days wasted reading manga*: `{us['manga_stats']['days_read']}`
-
-    """,
-    )
-
-    caption += f"*About*: {about_string}"
-
-    buttons = [
-        [InlineKeyboardButton(info_btn, url=us["url"])],
-        [
-            InlineKeyboardButton(
-                close_btn, callback_data=f"anime_close, {message.from_user.id}",
-            ),
-        ],
-    ]
-
-    update.effective_message.reply_photo(
-        photo=img,
-        caption=caption,
-        parse_mode=ParseMode.MARKDOWN,
-        reply_markup=InlineKeyboardMarkup(buttons),
-        disable_web_page_preview=False,
-    )
-    progress_message.delete()
-
-
-@run_async
 def upcoming(update: Update, context: CallbackContext):
     jikan = jikanpy.jikan.Jikan()
     upcomin = jikan.top("anime", page=1, subtype="upcoming")
@@ -463,72 +379,7 @@ def upcoming(update: Update, context: CallbackContext):
     update.effective_message.reply_text(upcoming_message)
 
 
-def site_search(update: Update, context: CallbackContext, site: str):
-    message = update.effective_message
-    search_query = extract_arg(message)
-    more_results = True
 
-    if not search_query:
-        message.reply_text("Give something to search")
-        return
-
-    if site == "kaizoku":
-        search_url = f"https://animekaizoku.com/?s={search_query}"
-        html_text = requests.get(search_url).text
-        soup = bs4.BeautifulSoup(html_text, "html.parser")
-        search_result = soup.find_all("h2", {"class": "post-title"})
-
-        if search_result:
-            result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> @KaizokuAnime: \n"
-            for entry in search_result:
-                post_link = "https://animekaizoku.com/" + entry.a["href"]
-                post_name = html.escape(entry.text)
-                result += f"• <a href='{post_link}'>{post_name}</a>\n"
-        else:
-            more_results = False
-            result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> @KaizokuAnime"
-
-    elif site == "kayo":
-        search_url = f"https://animekayo.com/?s={search_query}"
-        html_text = requests.get(search_url).text
-        soup = bs4.BeautifulSoup(html_text, "html.parser")
-        search_result = soup.find_all("h2", {"class": "title"})
-
-        result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> @KayoAnime: \n"
-        for entry in search_result:
-
-            if entry.text.strip() == "Nothing Found":
-                result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> @KayoAnime"
-                more_results = False
-                break
-
-            post_link = entry.a["href"]
-            post_name = html.escape(entry.text.strip())
-            result += f"• <a href='{post_link}'>{post_name}</a>\n"
-
-    buttons = [[InlineKeyboardButton("See all results", url=search_url)]]
-
-    if more_results:
-        message.reply_text(
-            result,
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(buttons),
-            disable_web_page_preview=True,
-        )
-    else:
-        message.reply_text(
-            result, parse_mode=ParseMode.HTML, disable_web_page_preview=True,
-        )
-
-
-@run_async
-def kaizoku(update: Update, context: CallbackContext):
-    site_search(update, context, "kaizoku")
-
-
-@run_async
-def kayo(update: Update, context: CallbackContext):
-    site_search(update, context, "kayo")
 
 
 __help__ = """
@@ -539,10 +390,7 @@ Get information about anime, manga or characters from [AniList](anilist.co).
  • `/anime <anime>`*:* returns information about the anime.
  • `/character <character>`*:* returns information about the character.
  • `/manga <manga>`*:* returns information about the manga.
- • `/user <user>`*:* returns information about a MyAnimeList user.
  • `/upcoming`*:* returns a list of new anime in the upcoming seasons.
- • `/kaizoku <anime>`*:* search an anime on animekaizoku.com
- • `/kayo <anime>`*:* search an anime on animekayo.com
  • `/airing <anime>`*:* returns anime airing info.
 
  """
@@ -551,18 +399,12 @@ ANIME_HANDLER = DisableAbleCommandHandler("anime", anime)
 AIRING_HANDLER = DisableAbleCommandHandler("airing", airing)
 CHARACTER_HANDLER = DisableAbleCommandHandler("character", character)
 MANGA_HANDLER = DisableAbleCommandHandler("manga", manga)
-USER_HANDLER = DisableAbleCommandHandler("user", user)
 UPCOMING_HANDLER = DisableAbleCommandHandler("upcoming", upcoming)
-KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku)
-KAYO_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo)
 
 dispatcher.add_handler(ANIME_HANDLER)
 dispatcher.add_handler(CHARACTER_HANDLER)
 dispatcher.add_handler(MANGA_HANDLER)
 dispatcher.add_handler(AIRING_HANDLER)
-dispatcher.add_handler(USER_HANDLER)
-dispatcher.add_handler(KAIZOKU_SEARCH_HANDLER)
-dispatcher.add_handler(KAYO_SEARCH_HANDLER)
 dispatcher.add_handler(UPCOMING_HANDLER)
 
 __mod_name__ = "Anime"
@@ -570,19 +412,13 @@ __command_list__ = [
     "anime",
     "manga",
     "character",
-    "user",
     "upcoming",
-    "kaizoku",
     "airing",
-    "kayo",
 ]
 __handlers__ = [
     ANIME_HANDLER,
     CHARACTER_HANDLER,
     MANGA_HANDLER,
-    USER_HANDLER,
     UPCOMING_HANDLER,
-    KAIZOKU_SEARCH_HANDLER,
-    KAYO_SEARCH_HANDLER,
     AIRING_HANDLER,
 ]

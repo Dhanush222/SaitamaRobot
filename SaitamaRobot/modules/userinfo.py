@@ -286,27 +286,8 @@ def info(update: Update, context: CallbackContext):
 
     disaster_level_present = False
 
-    if user.id == OWNER_ID:
-        text += "\n\nThe Disaster level of this person is 'God'."
-        disaster_level_present = True
-    elif user.id in DEV_USERS:
-        text += "\n\nThis user is member of 'Hero Association'."
-        disaster_level_present = True
-    elif user.id in DRAGONS:
-        text += "\n\nThe Disaster level of this person is 'Dragon'."
-        disaster_level_present = True
-    elif user.id in DEMONS:
-        text += "\n\nThe Disaster level of this person is 'Demon'."
-        disaster_level_present = True
-    elif user.id in TIGERS:
-        text += "\n\nThe Disaster level of this person is 'Tiger'."
-        disaster_level_present = True
-    elif user.id in WOLVES:
-        text += "\n\nThe Disaster level of this person is 'Wolf'."
-        disaster_level_present = True
-
     if disaster_level_present:
-        text += ' [<a href="https://t.me/OnePunchUpdates/155">?</a>]'.format(
+        text += ' [<a href="https://t.me/">?</a>]'.format(
             bot.username,
         )
 
@@ -537,9 +518,6 @@ Examples:
 
 *Overall Information about you:*
  • `/info`*:* get information about a user.
-
-*What is that health thingy?*
- Come and see [HP System explained](https://t.me/OnePunchUpdates/192)
 """
 
 SET_BIO_HANDLER = DisableAbleCommandHandler("setbio", set_about_bio)

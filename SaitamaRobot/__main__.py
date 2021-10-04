@@ -72,19 +72,16 @@ def get_readable_time(seconds: int) -> str:
 
 PM_START_TEXT = """
 Hey hi {}, I'm {}!
-I am an Anime themed group management bot.
-Built by weebs for weebs, I specialize in managing anime eccentric communities!
 """
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
-I'm a Hero For Fun and help admins manage their groups with One Punch! Have a look at the following for an idea of some of \
+Have a look at the following for an idea of some of \
 the things I can help you with.
 
 *Main* commands available:
  • /help: PM's you this message.
  • /help <module name>: PM's you info about that module.
- • /donate: information on how to donate!
  • /settings:
    • in PM: will send you your settings for all supported modules.
    • in a group: will redirect you to pm, with all that chat's settings.
@@ -97,12 +94,10 @@ And the following:
     "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n",
 )
 
-SAITAMA_IMG = "https://telegra.ph/file/46e6d9dfcb3eb9eae95d9.jpg"
+SAITAMA_IMG = "https://telegra.ph/file/181ff159c74b68ea84308.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
- You can support the project via [Paypal](ko-fi.com/sawada) or by contacting @Sawada \
- Supporting isnt always financial! \
- Those who cannot provide monetary support are welcome to help us develop the bot at @OnePunchDev."""
+ You can support by subscribe my channel @AnimeRepublic74"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -227,28 +222,18 @@ def start(update: Update, context: CallbackContext):
                         ],
                         [
                             InlineKeyboardButton(
-                                text="🚑 Support",
+                                text="Support",
                                 url=f"https://t.me/{SUPPORT_CHAT}",
                             ),
                             InlineKeyboardButton(
-                                text="🔔 Updates",
-                                url="https://t.me/OnePunchUpdates",
+                                text="Channel",
+                                url="https://t.me/XcodersHub",
                             ),
                         ],
                         [
                             InlineKeyboardButton(
-                                text="🧾 Getting Started",
-                                url="https://t.me/OnePunchUpdates/29",
-                            ),
-                            InlineKeyboardButton(
-                                text="🗄 Source code",
-                                url="https://github.com/AnimeKaizoku/SaitamaRobot",
-                            ),
-                        ],
-                        [
-                            InlineKeyboardButton(
-                                text="☠️ Kaizoku Network",
-                                url="https://t.me/Kaizoku/4",
+                                text="Anime Leech",
+                                url="https://t.me/AnimeRepublicMLR",
                             ),
                         ],
                     ],
