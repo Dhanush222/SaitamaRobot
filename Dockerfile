@@ -69,7 +69,8 @@ RUN git clone https://github.com/anime-republic/SaitamaRobot /root/SaitamaRobot
 WORKDIR /root/SaitamaRobot
 
 #Copy config file to /root/SaitamaRobot/SaitamaRobot
-COPY ./SaitamaRobot/sample_config.py ./SaitamaRobot/config.py* /root/SaitamaRobot/SaitamaRobot/
+COPY ./SaitamaRobot/config.py ./SaitamaRobot/config.py* /root/SaitamaRobot/SaitamaRobot/
+COPY ./SaitamaRobot/elevated_users.json ./elevated_users.json* /root/SaitamaRobot/SaitamaRobot/
 
 ENV PATH="/home/bot/bin:$PATH"
 
