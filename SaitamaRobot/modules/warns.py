@@ -86,7 +86,7 @@ def warn(
         if soft_warn:  # punch
             chat.unban_member(user.id)
             reply = (
-                f"<code>❕</code><b>Punch Event</b>\n"
+                f"<code>❕</code><b>Kicked Event</b>\n"
                 f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
                 f"<code> </code><b>•  Count:</b> {limit}"
             )
@@ -441,18 +441,18 @@ def set_warn_strength(update: Update, context: CallbackContext):
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has enabled strong warns. Users will be seriously punched.(banned)"
+                f"Has enabled strong warns. Users will be seriously kicked.(banned)"
             )
 
         elif args[0].lower() in ("off", "no"):
             sql.set_warn_strength(chat.id, True)
             msg.reply_text(
-                "Too many warns will now result in a normal punch! Users will be able to join again after.",
+                "Too many warns will now result in a normal kick! Users will be able to join again after.",
             )
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has disabled strong punches. I will use normal punch on users."
+                f"Has disabled strong kick. I will use normal kick on users."
             )
 
         else:
@@ -461,7 +461,7 @@ def set_warn_strength(update: Update, context: CallbackContext):
         limit, soft_warn = sql.get_warn_setting(chat.id)
         if soft_warn:
             msg.reply_text(
-                "Warns are currently set to *punch* users when they exceed the limits.",
+                "Warns are currently set to *kicked* users when they exceed the limits.",
                 parse_mode=ParseMode.MARKDOWN,
             )
         else:
@@ -510,7 +510,7 @@ __help__ = """
 be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`.
  • `/nowarn <keyword>`*:* stop a warning filter
  • `/warnlimit <num>`*:* set the warning limit
- • `/strongwarn <on/yes/off/no>`*:* If set to on, exceeding the warn limit will result in a ban. Else, will just punch.
+ • `/strongwarn <on/yes/off/no>`*:* If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
 """
 
 __mod_name__ = "Warnings"

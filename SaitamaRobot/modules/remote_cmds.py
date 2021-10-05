@@ -18,9 +18,9 @@ RBAN_ERRORS = {
     "User_not_participant",
     "Peer_id_invalid",
     "Group chat was deactivated",
-    "Need to be inviter of a user to punch it from a basic group",
+    "Need to be inviter of a user to kick it from a basic group",
     "Chat_admin_required",
-    "Only the creator of a basic group can punch group administrators",
+    "Only the creator of a basic group can kick group administrators",
     "Channel_private",
     "Not in the chat",
 }
@@ -32,9 +32,9 @@ RUNBAN_ERRORS = {
     "User_not_participant",
     "Peer_id_invalid",
     "Group chat was deactivated",
-    "Need to be inviter of a user to punch it from a basic group",
+    "Need to be inviter of a user to kick it from a basic group",
     "Chat_admin_required",
-    "Only the creator of a basic group can punch group administrators",
+    "Only the creator of a basic group can kick group administrators",
     "Channel_private",
     "Not in the chat",
 }
@@ -46,9 +46,9 @@ RKICK_ERRORS = {
     "User_not_participant",
     "Peer_id_invalid",
     "Group chat was deactivated",
-    "Need to be inviter of a user to punch it from a basic group",
+    "Need to be inviter of a user to kick it from a basic group",
     "Chat_admin_required",
-    "Only the creator of a basic group can punch group administrators",
+    "Only the creator of a basic group can kick group administrators",
     "Channel_private",
     "Not in the chat",
 }
@@ -60,9 +60,9 @@ RMUTE_ERRORS = {
     "User_not_participant",
     "Peer_id_invalid",
     "Group chat was deactivated",
-    "Need to be inviter of a user to punch it from a basic group",
+    "Need to be inviter of a user to kick it from a basic group",
     "Chat_admin_required",
-    "Only the creator of a basic group can punch group administrators",
+    "Only the creator of a basic group can kick group administrators",
     "Channel_private",
     "Not in the chat",
 }
@@ -74,9 +74,9 @@ RUNMUTE_ERRORS = {
     "User_not_participant",
     "Peer_id_invalid",
     "Group chat was deactivated",
-    "Need to be inviter of a user to punch it from a basic group",
+    "Need to be inviter of a user to kick it from a basic group",
     "Chat_admin_required",
-    "Only the creator of a basic group can punch group administrators",
+    "Only the creator of a basic group can kick group administrators",
     "Channel_private",
     "Not in the chat",
 }
@@ -291,7 +291,7 @@ def rkick(update: Update, context: CallbackContext):
         or not chat.get_member(bot.id).can_restrict_members
     ):
         message.reply_text(
-            "I can't restrict people there! Make sure I'm admin and can punch users.",
+            "I can't restrict people there! Make sure I'm admin and can kick users.",
         )
         return
 
@@ -305,32 +305,32 @@ def rkick(update: Update, context: CallbackContext):
             raise
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text("I really wish I could punch admins...")
+        message.reply_text("I really wish I could kick admins...")
         return
 
     if user_id == bot.id:
-        message.reply_text("I'm not gonna punch myself, are you crazy?")
+        message.reply_text("I'm not gonna kick myself, are you crazy?")
         return
 
     try:
         chat.unban_member(user_id)
-        message.reply_text("Punched from chat!")
+        message.reply_text("kicked from chat!")
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text("Punched!", quote=False)
+            message.reply_text("kicked!", quote=False)
         elif excp.message in RKICK_ERRORS:
             message.reply_text(excp.message)
         else:
             LOGGER.warning(update)
             LOGGER.exception(
-                "ERROR punching user %s in chat %s (%s) due to %s",
+                "ERROR kicking user %s in chat %s (%s) due to %s",
                 user_id,
                 chat.title,
                 chat.id,
                 excp.message,
             )
-            message.reply_text("Well damn, I can't punch that user.")
+            message.reply_text("Well damn, I can't kick that user.")
 
 
 @run_async

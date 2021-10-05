@@ -1327,7 +1327,7 @@ def fed_broadcast(update: Update, context: CallbackContext):
                     failed += 1
                     sql.chat_leave_fed(chat)
                     LOGGER.info(
-                        "Chat {} has left fed {} because I was punched".format(
+                        "Chat {} has left fed {} because I was kicked".format(
                             chat, fedinfo["fname"],
                         ),
                     )
