@@ -325,14 +325,14 @@ def export_data(update, context):
         },
     }
     baccinfo = json.dumps(backup, indent=4)
-    with open("SaitamaRobot{}.backup".format(chat_id), "w") as f:
+    with open("Groupmanagement{}.data".format(chat_id), "w") as f:
         f.write(str(baccinfo))
     context.bot.sendChatAction(current_chat_id, "upload_document")
     tgl = time.strftime("%H:%M:%S - %d/%m/%Y", time.localtime(time.time()))
     try:
         context.bot.sendMessage(
             JOIN_LOGGER,
-            "*Successfully imported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`".format(
+            "✅ Restored Data\n*Successfully restore data\n\n*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`".format(
                 chat.title, chat_id, tgl,
             ),
             parse_mode=ParseMode.MARKDOWN,
@@ -341,15 +341,15 @@ def export_data(update, context):
         pass
     context.bot.sendDocument(
         current_chat_id,
-        document=open("SaitamaRobot{}.backup".format(chat_id), "rb"),
-        caption="*Successfully Exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `SaitamaRobot-Backup` was specially made for notes.".format(
+        document=open("Groupmanagement{}.data".format(chat_id), "rb"),
+        caption="♻️ Created Backup\n*Successfully created data\n\n*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `data` was specially made for notes.".format(
             chat.title, chat_id, tgl,
         ),
         timeout=360,
         reply_to_message_id=msg.message_id,
         parse_mode=ParseMode.MARKDOWN,
     )
-    os.remove("SaitamaRobot{}.backup".format(chat_id))  # Cleaning file
+    os.remove("Groupmanagement{}.data".format(chat_id))  # Cleaning file
 
 
 # Temporary data
@@ -370,17 +370,16 @@ def get_chat(chat_id, chat_data):
 __mod_name__ = "Backups"
 
 __help__ = """
-*Only for group owner:*
+*⚠️ Only for group owner ⚠️*
 
- • /import: Reply to the backup file for the butler / emilia group to import as much as possible, making transfers very easy! \
- Note that files / photos cannot be imported due to telegram restrictions.
+ • /restore: Reply to the data file created by this bot
 
- • /export: Export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons) \
+ • /backup: backup group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons)
 
 """
 
-IMPORT_HANDLER = CommandHandler("import", import_data)
-EXPORT_HANDLER = CommandHandler("export", export_data, pass_chat_data=True)
+IMPORT_HANDLER = CommandHandler("restore", import_data)
+EXPORT_HANDLER = CommandHandler("backup", export_data, pass_chat_data=True)
 
 dispatcher.add_handler(IMPORT_HANDLER)
 dispatcher.add_handler(EXPORT_HANDLER)
