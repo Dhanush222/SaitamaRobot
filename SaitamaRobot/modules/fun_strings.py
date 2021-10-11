@@ -38,7 +38,7 @@ SLAP_SAITAMA_TEMPLATES = (
 )
 
 SLAP_TEMPLATES = (
-    "{user2} was killed by magic.",
+    "{user2} was killed by a dinosaur.",
     "{user2} starved without pats.",
     "{user2} was knocked into the void by {user1}.",
     "{user2} fainted.",
@@ -61,7 +61,7 @@ SLAP_TEMPLATES = (
     "{user2} got stoned...by an angry mob.",
     "{user1} sued the pants off {user2}.",
     "{user2} was one-hit KO'd by {user1}.",
-    "{user1} sent {user2} down the memory hole.",
+    "{user1} sent {user2} down the black hole.",
     "{user2} was a mistake. - '{user1}' ",
     "{user2} was made redundant.",
     "{user1} {hits} {user2} with a bat!.",
@@ -71,7 +71,7 @@ SLAP_TEMPLATES = (
     "{user1} {hits} {user2} with a Jet Pistol!.",
     "{user1} {hits} {user2} with a United States of Smash!.",
     "{user1} {hits} {user2} with a Detroit Smash!.",
-    "{user1} {hits} {user2} with a Texas Smash!.",
+    "{user1} {hits} {user2} with a annihilator!.",
     "{user1} {hits} {user2} with a California Smash!.",
     "{user1} {hits} {user2} with a New Hampshire Smash!.",
     "{user1} {hits} {user2} with a Missouri Smash!.",
@@ -205,7 +205,7 @@ ITEMS = (
     "shovel",
     "toaster",
     "book",
-    "laptop",
+    "grenede",
     "rubber chicken",
     "spiked bat",
     "heavy rock",

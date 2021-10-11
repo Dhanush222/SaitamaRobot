@@ -168,7 +168,7 @@ def lock(update, context) -> str:
                     if update.effective_message.chat.type == "private":
                         send_message(
                             update.effective_message,
-                            "This command is meant to use in group not in PM",
+                            "Stupid Guy This command is meant to use in group not in PM",
                         )
                         return ""
                     chat = update.effective_chat
@@ -203,7 +203,7 @@ def lock(update, context) -> str:
                     if update.effective_message.chat.type == "private":
                         send_message(
                             update.effective_message,
-                            "This command is meant to use in group not in PM",
+                            "Stupid Guy This command is meant to use in group not in PM",
                         )
                         return ""
                     chat = update.effective_chat
@@ -243,7 +243,7 @@ def lock(update, context) -> str:
     else:
         send_message(
             update.effective_message,
-            "I am not administrator or haven't got enough rights.",
+            "Make me admin with full rights.",
         )
 
     return ""
@@ -273,7 +273,7 @@ def unlock(update, context) -> str:
                     if update.effective_message.chat.type == "private":
                         send_message(
                             update.effective_message,
-                            "This command is meant to use in group not in PM",
+                            " Stupid Guy This command is meant to use in group not in PM",
                         )
                         return ""
                     chat = update.effective_chat
@@ -305,7 +305,7 @@ def unlock(update, context) -> str:
                     if update.effective_message.chat.type == "private":
                         send_message(
                             update.effective_message,
-                            "This command is meant to use in group not in PM",
+                            "Stupid Guy This command is meant to use in group not in PM",
                         )
                         return ""
                     chat = update.effective_chat
