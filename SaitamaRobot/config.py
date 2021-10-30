@@ -14,24 +14,24 @@ class Config(object):
     # REQUIRED
     # Login to https://my.telegram.org and fill in these slots with the details given by it
 
-    API_ID = 123456  # integer value, dont use ""
-    API_HASH = "awoo"
-    TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
-    OWNER_ID = 792109647  # If you dont know, run the bot and do /id in your private chat with it, also an integer
-    OWNER_USERNAME = "Sawada"
-    SUPPORT_CHAT = "OnePunchSupport"  # Your own group for support, do not add the @
-    JOIN_LOGGER = (-1001253661229)  # Prints any new group the bot is added to, prints just the name and ID.
-    EVENT_LOGS = (-1001190806654)  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
-    ALLOW_CHATS = -123455567
+    API_ID = 6391442  # integer value, dont use ""
+    API_HASH = "cad764d932cb8a6294885eba4eebaefb"
+    TOKEN = "2056148190:AAErxJrMCFpJcSBt58OAiA3DU-0iX2d8z3A"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
+    OWNER_ID = 1328664332  # If you dont know, run the bot and do /id in your private chat with it, also an integer
+    OWNER_USERNAME = "DI_TWA"
+    SUPPORT_CHAT = "BeastCloudOfficial"  # Your own group for support, do not add the @
+    JOIN_LOGGER = (-1001563628425)  # Prints any new group the bot is added to, prints just the name and ID.
+    EVENT_LOGS = (-1001563628425)  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
+    ALLOW_CHATS = -1001353874191
     
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = "something://somewhat:user@hosturl:port/databasename"  # needed for any database modules # its "URI" and not "URL" as herok and similar ones only accept it as such
+    SQLALCHEMY_DATABASE_URI = "mongodb+srv://Dhanush:password1@cluster0.fmtkt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"  # needed for any database modules # its "URI" and not "URL" as herok and similar ones only accept it as such
     LOAD = []
     NO_LOAD = ["rss", "cleaner", "connection", "math"]
     WEBHOOK = False
     INFOPIC = True
     URL = None
-    SPAMWATCH_API = ""  # go to support.spamwat.ch to get key
+    SPAMWATCH_API = "jpkdho0PTRIXp0F7_xsq61oGMID6KOS_~5eQllQV5RxvQxvDgRq1fPClS3Vmx2jm"  # go to support.spamwat.ch to get key
     SPAMWATCH_SUPPORT_CHAT = "@SpamWatchSupport"
 
     # OPTIONAL
